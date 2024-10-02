@@ -25,7 +25,7 @@ namespace Store.Web
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddDbContext<StoreDbContext>( options =>
+            builder.Services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             }
@@ -43,7 +43,7 @@ namespace Store.Web
 
             var app = builder.Build();
 
-           await ApplySeeding.ApplySeedingAsync( app );
+            await ApplySeeding.ApplySeedingAsync(app);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -52,7 +52,7 @@ namespace Store.Web
             }
             app.UseMiddleware<ExpetionMiddleWare>();
             app.UseHttpsRedirection();
-            app.UseStaticFiles(); 
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
