@@ -38,12 +38,21 @@ namespace Store.Repository
 
                 if (context.Products != null && !context.Products.Any())
                 {
-                    //persist data to database
+               
                     var productsData = File.ReadAllText("../Store.Repository/SeedData/products.json ");
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
 
                     if (products is not null)
                         await context.Products.AddRangeAsync(products);
+                }
+                if (context.DeliveryMethodS != null && !context.DeliveryMethodS.Any())
+                {
+                   
+                    var DeliveryMethodS = File.ReadAllText("../Store.Repository/SeedData/delivery.json");
+                    var delivery = JsonSerializer.Deserialize<List<DeliveryMethod>>(DeliveryMethodS);
+
+                    if (delivery is not null)
+                        await context.DeliveryMethodS.AddRangeAsync(delivery);
                 }
 
                 await context.SaveChangesAsync();
@@ -53,6 +62,8 @@ namespace Store.Repository
                 var logger = loggerFactory.CreateLogger<StoreContextSeed>();
                 logger.LogError(ex.Message);
             }
+          
+
         }
     }
 }
