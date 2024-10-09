@@ -39,11 +39,11 @@ namespace Store.Web
                 return ConnectionMultiplexer.Connect(configration);
             });
             builder.Services.AddApplicationServices();
-            builder.Services.AddIdentiyServices();  
+            builder.Services.AddIdentiyServices(builder.Configuration);  
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddSwaggerDocumentation();
             var app = builder.Build();
 
             await ApplySeeding.ApplySeedingAsync(app);

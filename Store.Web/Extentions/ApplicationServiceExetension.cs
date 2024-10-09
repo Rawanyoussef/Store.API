@@ -10,6 +10,8 @@ using Store.Service.Services.basketService;
 using Store.Service.Services.BasketServiceDtos;
 using Store.Service.Services.basketService.CustomerBasketDto;
 using Store.Repository.Basket;
+using Store.Service.TokenService;
+using Store.Service.UserSerives;
 
 namespace Store.Web.Extentions
 {
@@ -21,6 +23,8 @@ namespace Store.Web.Extentions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICacheService, CacheService>();
             services.AddScoped<IBasketService, BasketService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<IUserServices, UserServices>();
             services.AddScoped<IBasketRepository, BasketReposatpry>();
 
 
