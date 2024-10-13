@@ -12,5 +12,6 @@ namespace Store.Data.Entities.OrderEntity
         public string PriductName { get; set; }
         public string PictureUrl { get; set; }
 
+
     }
 }

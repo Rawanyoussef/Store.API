@@ -12,9 +12,6 @@ namespace Store.Data.Entities.IdinitiesEntities
         public string DisplayName { get; set; }
         public Address Address { get; set; }
 
-        public static implicit operator AppUser(AppUser v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }   
 }

@@ -13,5 +13,8 @@ namespace Store.Service.Services.basketService.CustomerBasketDto
         public int? DeliveryMethod { get; set; }
         public decimal ShippingPrice { get; set; }
         public List<BasketItemDto> BasketItems { get; set; } = new List<BasketItemDto>();
+        public string? PaymentIntentId { get; set; }
+        public string? ClientSecret { get; set; }
     }
 }
+
