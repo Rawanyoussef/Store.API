@@ -17,7 +17,7 @@ namespace Store.Repository.Specification.OrderSpecs
             AddOrderByDescending(order => order.orderDate);
         }
 
-        public OrderWithItemSpecifications(Guid id)
+        public OrderWithItemSpecifications(Guid id , string buyerEmail)
            : base(order => order.Id == id)
         {
             AddInclude(order => order.DeliveryMethod);

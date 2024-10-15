@@ -7,29 +7,33 @@ using Store.Service.UserSerives.Dto;
 
 namespace Store.Web.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    [Route("api/[controller]")]
+    public class AccountController : BaseController
     {
         private readonly IUserServices _userServices;
         private readonly UserManager<AppUser> _userManger;
 
-        public AccountController(IUserServices userServices , UserManager<AppUser> userManger) 
+        public AccountController(IUserServices userServices, UserManager<AppUser> userManger)
         {
-           _userServices = userServices;
+            _userServices = userServices;
             _userManger = userManger;
         }
-        [HttpPost]
-        public async Task<ActionResult<UserDto>>Login(LoginDto input)
+
+        // Login Endpoint
+        [HttpPost("login")]
+        public async Task<ActionResult<UserDto>> Login(LoginDto input)
         {
             var user = await _userServices.Login(input);
             if (user == null)
             {
-                return BadRequest();
+                return BadRequest(new { message = "Invalid credentials" });
             }
             return Ok(user);
         }
-        [HttpPost]
+
+        // Register Endpoint
+        [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto input)
         {
             var user = await _userServices.Register(input);
@@ -37,25 +41,32 @@ namespace Store.Web.Controllers
             {
                 return BadRequest(new { message = "User already exists" });
             }
-
             return Ok(user);
         }
-        public async Task<UserDto> GetCurrentUserDetails()
+
+        // Get Current User Details
+        [HttpGet("current-user")]
+        public async Task<ActionResult<UserDto>> GetCurrentUserDetails()
         {
             var userIdClaim = User?.FindFirst("UserId");
 
             if (userIdClaim == null)
             {
-                throw new UnauthorizedAccessException("User not found.");
+                return Unauthorized(new { message = "User not found" });
             }
+
             var user = await _userManger.FindByIdAsync(userIdClaim.Value);
-            return new UserDto
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            return Ok(new UserDto
             {
                 Id = Guid.Parse(user.Id),
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-            };
+            });
         }
-
     }
 }

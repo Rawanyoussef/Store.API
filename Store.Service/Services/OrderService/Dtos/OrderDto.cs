@@ -12,7 +12,7 @@ namespace Store.Service.Services.OrderService.Dtos
         public string BasketId { get; set; }
         public string BasketEmail { get; set; }
         [Required]
-        public int DeliveryMehtod { get; set; }
+        public int DeliveryMehtodId  { get; set; }
         public AddressDto ShippingAddress { get; set; }
         public decimal ShippingPrice { get; set; }
     }

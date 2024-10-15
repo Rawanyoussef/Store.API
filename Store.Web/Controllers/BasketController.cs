@@ -5,9 +5,8 @@ using Store.Service.Services.BasketServiceDtos;
 
 namespace Store.Web.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
-    public class BasketController : ControllerBase
+
+    public class BasketController :BaseController 
     {
         private readonly IBasketService _basketService;
 

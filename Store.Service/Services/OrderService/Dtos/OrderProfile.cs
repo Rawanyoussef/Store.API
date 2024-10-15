@@ -10,15 +10,22 @@ namespace Store.Service.Services.OrderService.Dtos
 
             CreateMap<ShippingAddress, AddressDto>().ReverseMap();
             CreateMap<Order, OrderDto>()
-                .ForMember(dest => dest.DeliveryMehtod,
+                .ForMember(dest => dest.DeliveryMehtodId,
                            options => options.MapFrom(src => src.DeliveryMethod.ShortName))
                 .ForMember(dest => dest.ShippingPrice,
                            options => options.MapFrom(src => src.DeliveryMethod.Price));
+
+
+
             CreateMap<OrderItem, OrderItemDto>()
+
                 .ForMember(dest => dest.ProductItemId,
                            options => options.MapFrom(src => src.prdocutItem.ProductId))
                 .ForMember(dest => dest.ProductName,
                            options => options.MapFrom(src => src.prdocutItem.PriductName))
+                  .ForMember(dest => dest.PictureUrl,
+                           options => options.MapFrom(src => src.prdocutItem.PictureUrl))
+
                 .ForMember(dest => dest.PictureUrl, options => options.MapFrom<OrderItemPictureUrlResolver>()).ReverseMap();
         }
     }
